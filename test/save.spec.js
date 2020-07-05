@@ -60,5 +60,15 @@ describe('save()', () => {
     expect(resHapi.state)
       .toHaveBeenCalled()
       .toHaveBeenCalledWith('testName', 'testVal', save.defaultHapiOpts);
+
+    const resFastify = {
+      setCookie: expect.createSpy(),
+    };
+
+    save.default('testName', 'testVal', {}, resFastify);
+
+    expect(resFastify.setCookie)
+      .toHaveBeenCalled()
+      .toHaveBeenCalledWith('testName', 'testVal', save.defaultFastityOpts);
   });
 });

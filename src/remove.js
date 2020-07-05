@@ -13,14 +13,18 @@ export default (name, opt, res) => {
   if (typeof document !== 'undefined') {
     opt.expires = new Date(1970, 1, 1, 0, 0, 1);
     document.cookie = cookie.serialize(name, '', options);
+    return;
   }
 
+  // express & fastify
   if (isResWritable(res) && res.clearCookie) {
     res.clearCookie(name, options);
+    return;
   }
 
   // hapi
   if (isResWritable(res) && res.unstate) {
     res.unstate(name);
+    return;
   }
 };

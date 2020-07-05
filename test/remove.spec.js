@@ -37,13 +37,13 @@ describe('remove()', () => {
   });
 
   it('should remove with headers on server', () => {
-    const resExpress = {
+    const resExpressAndFastify = {
       clearCookie: expect.createSpy(),
     };
 
-    remove('testName', {}, resExpress);
+    remove('testName', {}, resExpressAndFastify);
 
-    expect(resExpress.clearCookie)
+    expect(resExpressAndFastify.clearCookie)
       .toHaveBeenCalled()
       .toHaveBeenCalledWith('testName', {});
 
